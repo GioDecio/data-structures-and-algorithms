@@ -12,10 +12,6 @@ def group_anagrams(group):
     
 
     
-
-
-
-
 print("1st set:")
 print( group_anagrams(["eat", "tea", "tan", "ate", "nat", "bat"]) )
 
