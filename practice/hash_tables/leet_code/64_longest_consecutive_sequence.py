@@ -29,7 +29,7 @@ def longest_consecutive_sequence(nums):
             
             longest_sequence = max(longest_sequence, current_sequence)
     
-    return longest_sequence
+    return longest_sequence 
 
 
 
