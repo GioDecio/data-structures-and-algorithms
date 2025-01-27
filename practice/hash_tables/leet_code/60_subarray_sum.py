@@ -9,10 +9,12 @@ def subarray_sum_inefficient(nums, target):
 
 def subarray_sum(nums, target):
     prefix_sum = 0
-    sum_dict = {0:-1}
+    #sum_dict = {0:-1}
+    sum_dict = {}
     for idx, num in enumerate(nums):
         prefix_sum +=num
         if prefix_sum - target in sum_dict:
+            print(sum_dict)
             return [sum_dict[prefix_sum-target]+1, idx]
         sum_dict[prefix_sum]=idx 
     return []
@@ -21,9 +23,9 @@ def subarray_sum(nums, target):
     
 
 
-nums = [1, 2, 3, 4, 5]
-target = 9
-print ( subarray_sum(nums, target) )
+# nums = [1, 2, 3, 4, 5]
+# target = 9
+# print ( subarray_sum(nums, target) )
 
 # nums = [-1, 2, 3, -4, 5]
 # target = 0
@@ -33,9 +35,9 @@ print ( subarray_sum(nums, target) )
 # target = 3
 # print ( subarray_sum(nums, target) )
 
-# nums = []
-# target = 0
-# print ( subarray_sum(nums, target) )
+nums = [1,2,3]
+target = 3
+print ( subarray_sum(nums, target) )
 
 
 
