@@ -90,9 +90,59 @@ class LinkedList:
         temp = self.head  
         for _ in range(index):
             temp = temp.next
-        return temp.value
+        return temp
             
+    @print_list_after
+    def set_value(self, index, value):
+        temp = self.get(index)
+        if temp:
+            temp.value = value
+            return value
+        return None
+    
+    @print_list_after
+    def insert(self, index, value):
+        if index > self.length or index < 0 :
+            return None
+        if index == 0:
+            return self.prepend(value)
+        if index == self.length:
+            return self.append(value)
+        new_node = Node(value)
+        prev = self.get(index-1)
+        post = self.get(index)
+        prev.next = new_node
+        new_node.next = post
+        self.length +=1 
+        return True
+    
+    @print_list_after
+    def remove(self, index):
+        if index > self.length or index < 0 :
+            return None
+        if index == 0:
+            return self.pop_first()
+        if index == self.length-1:
+            return self.pop()
+        temp = self.get(index-1)
+        temp.next = temp.next.next
+        self.length -=1
+        return True
 
+        
+    @print_list_after
+    def reverse(self):
+        temp = self.head
+        self.head = self.tail
+        self.tail =temp
+        before = None 
+        after = temp.next
+        for _ in range(self.length):
+            after=temp.next
+            temp.next = before # this is what reverses the arrow         
+            before = temp
+            temp = after
+        return True
 
 
 
@@ -101,8 +151,14 @@ class LinkedList:
     
 linked_list = LinkedList(1)
 linked_list.append(5)
+linked_list.append(100)
+linked_list.append(200)
 linked_list.append([1,2,3,4,6])
 linked_list.prepend(40)
 linked_list.pop()
 linked_list.pop_first()
 linked_list.get(20)
+linked_list.set_value(0,'A')
+linked_list.insert(1,23)
+linked_list.remove(1)
+linked_list.reverse()
