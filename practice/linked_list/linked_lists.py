@@ -12,7 +12,7 @@ def print_list_after(func):
             print(temp.value, end=" -> ")
             temp = temp.next
         print("None")
-        print(f"Return value from {func.__name__}: {result}")  # Add this line to debug
+        # print(f"Return value from {func.__name__}: {result}")  # Add this line to debug
         return result
     return wrapper
 
@@ -22,6 +22,7 @@ class Node:
         self.next = None
 
 class LinkedList:
+    @print_list_after
     def __init__(self, value):
         new_node = Node(value)
         self.head = new_node
@@ -143,6 +144,10 @@ class LinkedList:
             before = temp
             temp = after
         return True
+    
+    
+
+
 
 
 
@@ -150,15 +155,15 @@ class LinkedList:
 
     
 linked_list = LinkedList(1)
-linked_list.append(5)
-linked_list.append(100)
-linked_list.append(200)
-linked_list.append([1,2,3,4,6])
-linked_list.prepend(40)
-linked_list.pop()
-linked_list.pop_first()
-linked_list.get(20)
-linked_list.set_value(0,'A')
-linked_list.insert(1,23)
-linked_list.remove(1)
-linked_list.reverse()
+# linked_list.append(5)
+# linked_list.append(100)
+# linked_list.append(200)
+# linked_list.append([1,2,3,4,6])
+# linked_list.prepend(40)
+# linked_list.pop()
+# linked_list.pop_first()
+# linked_list.get(20)
+# linked_list.set_value(0,'A')
+# linked_list.insert(1,23)
+# linked_list.remove(1)
+# linked_list.reverse()

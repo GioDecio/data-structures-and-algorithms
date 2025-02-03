@@ -47,8 +47,8 @@ class LinkedList:
     #   | - We maintain a 'previous' node as a reference    |
     #   |   to re-link the list when skipping duplicates.   |
     #   | - The 'current' node iterates through the list.   |
-    #   | - The 'values' set holds unique items seen so far.
-    # 
+    #   | - The 'values' set holds unique items seen so far.|
+    #   +===================================================+
     def remove_duplicates(self):
         if not self.head:
             return None
@@ -61,16 +61,14 @@ class LinkedList:
             if current.value not in uniques:
                 uniques.add(current.value)
                 previous = current
+                current = current.next
             else: 
                 previous.next = current.next
+                current=current.next
                 self.length -=1 
-            current=current.next
 
 
-
-    #   +===================================================+
-
-    
+            
             
 
 
