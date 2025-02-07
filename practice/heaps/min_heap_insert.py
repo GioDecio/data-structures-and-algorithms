@@ -1,4 +1,4 @@
-class MaxHeap:
+class MinHeap:
     def __init__(self):
         self.heap = []
 
@@ -19,45 +19,37 @@ class MaxHeap:
         self.heap.append(value)
         current = len(self.heap)-1
         while current >0:
-            if self.heap[current] > self.heap[self._parent(current)]:
+            if self.heap[current] < self.heap[self._parent(current)]:
                 self._swap(current, self._parent(current))
                 current = self._parent(current)
             else:
                 return False 
         return True
 
-    
+ 
+ 
+myheap = MinHeap()
+myheap.insert(12)
+myheap.insert(10)
+myheap.insert(8)
+myheap.insert(6)
 
+print(myheap.heap)  # [6, 8, 10, 12]
 
+myheap.insert(4)
 
+print(myheap.heap)  # [4, 6, 10, 12, 8]
 
-        
-    
-    
-myheap = MaxHeap()
-myheap.insert(99)
-myheap.insert(72)
-myheap.insert(61)
-myheap.insert(58)
+myheap.insert(2)
 
-print(myheap.heap)  
-
-myheap.insert(100)
-
-print(myheap.heap)  
-
-
-myheap.insert(75)
-
-print(myheap.heap)
+print(myheap.heap)  # [2, 6, 4, 12, 8, 10]
 
 
 """
     EXPECTED OUTPUT:
     ----------------
-    [99, 72, 61, 58]
-    [100, 99, 61, 58, 72]
-    [100, 99, 75, 58, 72, 61]
+    [6, 8, 10, 12]
+    [4, 6, 10, 12, 8]
+    [2, 6, 4, 12, 8, 10]
 
 """
-    

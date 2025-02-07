@@ -1,6 +1,6 @@
 # Heaps
 Heaps are complete trees, no gaps! 
-The descendants must be equal or greater (or smaller) than the parent.
+The descendants must be equal or greater (or smaller if it is a minheap) than the parent.
 You can have duplicates
 
 Max heap vs Min heaps
@@ -14,3 +14,9 @@ is stored like this:
  .
  What about parent?
  you divde the index of the child by 2
+
+ Usually they are encoded liske this though:
+ [99|72|61|58|55|27|18]
+
+ ## Priority queues
+ Hepas are preferred because of big O (log n).
