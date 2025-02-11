@@ -84,7 +84,7 @@ bst.insert(8)
 
 print(bst.kth_smallest(1))  # Expected output: 2
 print(bst.kth_smallest(3))  # Expected output: 4
-print(bst.kth_smallest(8))  # Expected output: 7
+print(bst.kth_smallest(6))  # Expected output: 7
 
 
 """
