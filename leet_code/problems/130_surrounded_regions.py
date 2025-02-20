@@ -14,64 +14,93 @@ def sourrounded_regions(board):
     :type grid: List[List[str]]
     :rtype: int
     """
+    print("\n")
 
-    def is_border(board, i, j):
-        if i == 0:
-            return True
-        if j == 0:
-            return True
-        if i == len(board) - 1:
-            return True
-        if j == len(board[i]) - 1:
-            return True
-        return False
+    if len(board) != 1:
 
-    def traverse(board, i, j):
-
-        board[i][j] = "X"  # mark cell as visited
-
-        # Scan adjacent cells
-        if j == len(board[i]) - 2:
-            pass
-        else:
-            if j + 1 < len(board[i]) and board[i][j + 1] == "O":  # check right
-                traverse(board, i, j + 1)
-        if i == len(board) - 2:
-            pass
-        else:
-            if i + 1 < len(board) and board[i + 1][j] == "O":  # check down
+        def traverse(board, i, j):
+            board[i][j] = "NS"  # mark visited cell as non surroundable
+            if i == 0 and board[i + 1][j] == "O":  # Check down
                 traverse(board, i + 1, j)
-        if i == 1:
-            pass
-        else:
-            if i - 1 > 0 and board[i - 1][j] == "O":  # check up
+            if i == len(board) - 1 and board[i - 1][j] == "O":  # Check up
                 traverse(board, i - 1, j)
-        if j == 1:
-            pass
-        else:
-            if (
-                j - 1 < len(board[i]) and j - 1 >= 0 and board[i][j - 1] == "O"
-            ):  # check left
+            if j == 0 and board[i][j + 1] == "O":  # Check right
+                traverse(board, i, j + 1)
+            if j == len(board[i]) - 1 and board[i][j - 1] == "O`":  # Check left
                 traverse(board, i, j - 1)
 
-    for i in range(len(board)):
-        for j in range(len(board[i]) - 1):
-            if board[i][j] == "O" and not is_border(board, i, j):
-                if (
-                    (board[i - 1][j] == "O" and is_border(board, i - 1, j))
-                    or (board[i + 1][j] == "O" and is_border(board, i + 1, j))
-                    or (board[i][j - 1] == "O" and is_border(board, i, j - 1))
-                    or (board[i][j + 1] == "O" and is_border(board, i, j + 1))
-                ):
-                    pass
-                else:
+        def is_border(board, i, j):
+            if i == 0:
+                return True
+            if j == 0:
+                return True
+            if i == len(board) - 1:
+                return True
+            if j == len(board[i]) - 1:
+                return True
+            return False
+
+        # Scan the board
+        for i in range(len(board)):
+            for j in range(len(board[i])):
+                if is_border(board, i, j) and board[i][j] == "O":
                     traverse(board, i, j)
-            else:
-                pass
+        # Mark non surroundable with "O"
+        for i in range(len(board)):
+            for j in range(len(board[i])):
+                if board[i][j] == "NS":
+                    board[i][j] = "O"
+                else:
+                    board[i][j] = "X"
+
     return board
 
 
 board1 = [["X", "X"], ["O", "O"]]
 board2 = [["O", "O", "O"], ["O", "O", "O"], ["O", "O", "O"]]
-print(sourrounded_regions(board1))
-print(sourrounded_regions(board2))
+board3 = [["O", "O", "X"], ["O", "X", "O"], ["X", "X", "X"]]
+board4 = [["X", "X", "X"], ["X", "O", "X"], ["X", "X", "X"]]
+board5 = [
+    ["X", "X", "X", "X"],
+    ["X", "O", "O", "X"],
+    ["X", "X", "O", "X"],
+    ["X", "O", "X", "X"],
+]
+board6 = [["X"]]
+board7 = [["O"]]
+board8 = [
+    ["O", "X", "X", "O", "X"],
+    ["X", "X", "X", "X", "O"],
+    ["X", "X", "O", "X", "X"],
+    ["O", "X", "X", "X", "O"],
+    ["X", "X", "O", "X", "O"],
+]
+
+# print(sourrounded_regions(board1))
+# print(sourrounded_regions(board2))
+# print(sourrounded_regions(board3))
+# print(sourrounded_regions(board4))
+# print(sourrounded_regions(board5))
+# print(sourrounded_regions(board6))
+# print(sourrounded_regions(board7))
+print(f"{sourrounded_regions(board8)}")
+print(
+    """ Expected board8:
+
+    [
+        ["O", "X", "X", "O", "X"],
+        ["X", "X", "X", "X", "O"],
+        ["X", "X", "X", "O", "X"],
+        ["O", "X", "O", "O", "O"],
+        ["X", "X", "O", "X", "O"],
+    ]
+"""
+)
+
+"""[
+    ["O", "X", "X", "O", "X"],
+    ["X", "X", "X", "X", "O"],
+    ["X", "X", "X", "X", "X"],
+    ["O", "X", "X", "X", "O"],
+    ["X", "X", "O", "X", "O"],
+]"""
