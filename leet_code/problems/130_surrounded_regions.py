@@ -14,44 +14,39 @@ def sourrounded_regions(board):
     :type grid: List[List[str]]
     :rtype: int
     """
-    print("\n")
+    # print("\n")
 
     if len(board) != 1:
 
-        def traverse(board, i, j):
-            board[i][j] = "NS"  # mark visited cell as non surroundable
-            if i == 0 and board[i + 1][j] == "O":  # Check down
-                traverse(board, i + 1, j)
-            if i == len(board) - 1 and board[i - 1][j] == "O":  # Check up
-                traverse(board, i - 1, j)
-            if j == 0 and board[i][j + 1] == "O":  # Check right
-                traverse(board, i, j + 1)
-            if j == len(board[i]) - 1 and board[i][j - 1] == "O`":  # Check left
-                traverse(board, i, j - 1)
-
-        def is_border(board, i, j):
-            if i == 0:
-                return True
-            if j == 0:
-                return True
-            if i == len(board) - 1:
-                return True
-            if j == len(board[i]) - 1:
+        def is_border(i, j):
+            if i == 0 or j == 0 or i == len(board) - 1 or j == len(board[0]) - 1:
                 return True
             return False
+
+        def traverse(i, j):
+            board[i][j] = "NS"
+            if i - 1 >= 0 and board[i - 1][j] == "O":
+                traverse(i - 1, j)  # Check up
+            if j - 1 >= 0 and board[i][j - 1] == "O":
+                traverse(i, j - 1)  # Check left
+            if i + 1 < len(board) and board[i + 1][j] == "O":
+                traverse(i + 1, j)  # check down
+            if j + 1 < len(board[0]) and board[i][j + 1] == "O":
+                traverse(i, j + 1)  # Check right
 
         # Scan the board
         for i in range(len(board)):
             for j in range(len(board[i])):
-                if is_border(board, i, j) and board[i][j] == "O":
-                    traverse(board, i, j)
-        # Mark non surroundable with "O"
+                if board[i][j] == "O" and is_border(i, j):
+                    traverse(i, j)
+
+        # Second loop: convert remaining 'O's to 'X's
         for i in range(len(board)):
             for j in range(len(board[i])):
-                if board[i][j] == "NS":
-                    board[i][j] = "O"
-                else:
+                if board[i][j] == "O":
                     board[i][j] = "X"
+                elif board[i][j] == "NS":
+                    board[i][j] = "O"
 
     return board
 
@@ -76,31 +71,36 @@ board8 = [
     ["X", "X", "O", "X", "O"],
 ]
 
-# print(sourrounded_regions(board1))
-# print(sourrounded_regions(board2))
-# print(sourrounded_regions(board3))
-# print(sourrounded_regions(board4))
-# print(sourrounded_regions(board5))
-# print(sourrounded_regions(board6))
-# print(sourrounded_regions(board7))
-print(f"{sourrounded_regions(board8)}")
-print(
-    """ Expected board8:
-
-    [
-        ["O", "X", "X", "O", "X"],
-        ["X", "X", "X", "X", "O"],
-        ["X", "X", "X", "O", "X"],
-        ["O", "X", "O", "O", "O"],
-        ["X", "X", "O", "X", "O"],
-    ]
-"""
-)
-
-"""[
+[
     ["O", "X", "X", "O", "X"],
     ["X", "X", "X", "X", "O"],
     ["X", "X", "X", "X", "X"],
     ["O", "X", "X", "X", "O"],
     ["X", "X", "O", "X", "O"],
-]"""
+]
+
+print(sourrounded_regions(board1))
+print(sourrounded_regions(board2))
+print(sourrounded_regions(board3))
+print(sourrounded_regions(board4))
+print(sourrounded_regions(board5))
+print(sourrounded_regions(board6))
+print(sourrounded_regions(board7))
+print(f"{sourrounded_regions(board8)}")
+
+
+[
+    ["O", "X", "X", "O", "X"],
+    ["X", "O", "O", "X", "O"],
+    ["X", "O", "X", "O", "X"],
+    ["O", "X", "O", "O", "O"],
+    ["X", "X", "O", "X", "O"],
+]
+
+[
+    ["O", "X", "X", "O", "X"],
+    ["X", "X", "X", "X", "O"],
+    ["X", "X", "X", "X", "X"],
+    ["O", "X", "X", "X", "O"],
+    ["X", "X", "O", "X", "O"],
+]
