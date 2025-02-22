@@ -6,21 +6,20 @@ def is_valid(s):
             stack.append(char)
         else:
             if char != ")":
-                return "Invalid string"
-
-            if len(stack) == 0:
+                return False
+            elif not stack:
                 return False
             else:
                 stack.pop()
 
-    if len(stack) == 0 and s:
+    if not stack:
         return True
 
     return False
 
 
 s1 = "(]"
-s2 = ")))))"
+s2 = "()"
 s3 = "((((("
 s4 = ")"
 s5 = ""

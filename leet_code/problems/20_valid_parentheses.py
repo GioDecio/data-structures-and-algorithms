@@ -1,52 +1,39 @@
 def is_valid(s):
-    if not s:
-        return False
+    # if not s:
+    #     return False
 
-    stack_round = []
-    stack_square = []
-    stack_bracket = []
-
+    stack = []
     for char in s:
-        if char == "(":
-            stack_round.append(char)
-        elif char == "[":
-            stack_square.append(char)
-        elif char == "{":
-            stack_bracket.append(char)
-
+        if char == "(" or char == "[" or char == "{":
+            stack.append(char)
         else:
-            if char == ")":
-                if not stack_round:
-                    return False
+            if not stack:
+                return False
+            else:
+                if (
+                    (char == ")" and stack[-1] == "(")
+                    or (char == "]" and stack[-1] == "[")
+                    or (char == "}" and stack[-1] == "{")
+                ):
+                    stack.pop()
                 else:
-                    stack_round.pop()
-            elif char == "]":
-                if not stack_square:
                     return False
-                else:
-                    stack_square.pop()
-            elif char == "}":
-                if not stack_bracket:
-                    return False
-                else:
-                    stack_bracket.pop()
 
-    if not stack_round and not stack_square and not stack_bracket:
+    if not stack:
         return True
-
     return False
 
 
-s1 = "(]"
+s1 = "(])"
 s2 = "}{}"
 s3 = "][]"
 s4 = ")"
-s5 = "{}"
+s5 = ""
 s6 = "[()]"
 s7 = "((()"
 s8 = ")((("
 s9 = "[]))))"
-s10 = "([)]"
+s10 = "({})"
 
 print(is_valid(s1))
 print(is_valid(s2))
