@@ -1,8 +1,9 @@
 def is_valid(s):
-    # if not s:
-    #     return False
 
     stack = []
+
+    parentheses_dictionary = {")": "(", "]": "[", "}": "{"}
+
     for char in s:
         if char == "(" or char == "[" or char == "{":
             stack.append(char)
@@ -10,10 +11,14 @@ def is_valid(s):
             if not stack:
                 return False
             else:
+                # if (
+                #     (char == ")" and stack[-1] == "(")
+                #     or (char == "]" and stack[-1] == "[")
+                #     or (char == "}" and stack[-1] == "{")
+                # ):
                 if (
-                    (char == ")" and stack[-1] == "(")
-                    or (char == "]" and stack[-1] == "[")
-                    or (char == "}" and stack[-1] == "{")
+                    char in parentheses_dictionary
+                    and stack[-1] == parentheses_dictionary[char]
                 ):
                     stack.pop()
                 else:
