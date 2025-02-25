@@ -16,10 +16,7 @@ def is_valid(s):
                 #     or (char == "]" and stack[-1] == "[")
                 #     or (char == "}" and stack[-1] == "{")
                 # ):
-                if (
-                    char in parentheses_dictionary
-                    and stack[-1] == parentheses_dictionary[char]
-                ):
+                if stack[-1] == parentheses_dictionary[char]:
                     stack.pop()
                 else:
                     return False
