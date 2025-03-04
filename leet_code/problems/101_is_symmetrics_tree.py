@@ -7,9 +7,6 @@ def isSymmetric(self, root):
     if not root:
         return True
 
-    if root and not root.left and not root.right:
-        return True
-
     def checker(left, right):
         if not left and not right:
             return True
@@ -17,10 +14,10 @@ def isSymmetric(self, root):
         if not left or not right:
             return False
 
-        if left.val == right.val:
-            return True
-        else:
-            checker(left.left, right.left)
-            checker(right.left, right.right)
+        return (
+            (left.val == right.val)
+            and checker(left.left, right.right)
+            and checker(left.right, right.left)
+        )
 
-    return self.isSymmetric(root.left) and self.isSymmetric(root.right)
+    return checker(root.left, root.right)
