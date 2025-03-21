@@ -27,33 +27,29 @@ def romanToInt(s):
     """
 
     roman_dict = {"I": 1, "V": 5, "X": 10, "L": 50, "C": 100, "D": 500, "M": 1000}
-    place_holder = {
-        "O": "0",
-        "IV": "4",
-        "IX": "9",
-        "XL": "40",
-        "XC": "90",
-        "CD": "400",
-        "CM": "900",
-    }
 
     n = 0
     i = len(s) - 1
     while i >= 0:
-        print(f"s[i - 1] + s[i]: {s[i - 1] + s[i]}")
-        if s[i - 1] + s[i] in place_holder:
-            print(f"In s[i - 1] + s[i]: {s[i - 1] + s[i]}")
-            s[i - 1] = place_holder[s[i - 1] + s[i]]
-            s[i] = place_holder["O"]
-        n += roman_dict[s[i]]
-        i -= 1
+        # print(f"i:{i}")
+        if s[i] > s[i - 1]:
+            # print("?")
+            temp = roman_dict[s[i]] - roman_dict[s[i - 1]]
+            i -= 2
+        else:
+            # print("ciao")
+            temp = roman_dict[s[i]]
+            i -= 1
+
+        n += temp
 
     return n
 
 
-inputs = ["IV"]
-outputs = [4]
+inputs = ["I", "II", "IV", "LVIII", "MCMXCIV"]
+outputs = [1, 2, 4, 58, 1994]
 
 for input, output in zip(inputs, outputs):
     print(input, output)
     print(f"Out:{romanToInt(input)} - Exp: {output}")
+    # print(romanToInt(input))
