@@ -30,9 +30,9 @@ def romanToInt(s):
 
     n = 0
     i = len(s) - 1
-    while i >= 0:
+    while i > -1:
         # print(f"i:{i}")
-        if s[i] > s[i - 1]:
+        if i != 0 and roman_dict[s[i]] > roman_dict[s[i - 1]]:
             # print("?")
             temp = roman_dict[s[i]] - roman_dict[s[i - 1]]
             i -= 2
@@ -42,6 +42,8 @@ def romanToInt(s):
             i -= 1
 
         n += temp
+        # print(f"temp: {temp}")
+        # print(f"n:{n}\n")
 
     return n
 
@@ -50,6 +52,7 @@ inputs = ["I", "II", "IV", "LVIII", "MCMXCIV"]
 outputs = [1, 2, 4, 58, 1994]
 
 for input, output in zip(inputs, outputs):
-    print(input, output)
-    print(f"Out:{romanToInt(input)} - Exp: {output}")
-    # print(romanToInt(input))
+    if input in inputs:
+        # print(input, output)
+        print(f"Out:{romanToInt(input)} - Exp: {output}")
+        # print(romanToInt(input))
