@@ -4,8 +4,9 @@ def isPalindrome(x):
         :rtype: bool
         """
 
-        if x< 0 or x//10 !=0 or x%10 ==0:
-                return False
+        if x< 0 or (x%10==0 and x!=0):
+            return False
+        
 
         reversed_half = 0
 
