@@ -26,11 +26,14 @@ class Solution(object):
             else:
                 l2_val = 0
             sum_ = l1_val + l2_val + carry
-            carry = sum_/10
+            carry = sum_//10
             digit = sum_%10
-            dummy.next = ListNode(digit)
-            l1 = l1.next
-            l2 = l2.next
+            current.next = ListNode(digit)
+            current = current.next
+            if l1:
+                l1 = l1.next
+            if l2:
+                l2 = l2.next
         
         return dummy.next
 
