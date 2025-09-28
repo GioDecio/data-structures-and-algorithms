@@ -10,23 +10,24 @@ def is_palindrome(s):
     :type s: str
     :rtype: bool
     """
+    print('\n')
+    s = s.replace(' ', '') 
+    print(f"s: {s}")
     left = 0
-    right = len(s) - 1
+    right = len(s)-1 
+    
+    while right>=left:
 
-    while left <= right:
-        if s[left] != s[right]:
+        print(left, right)
+        print(s[left], s[right])
+        if s[left].lower() !=s[right].lower():
             return False
-        left += 1
-        right -= 1
+
+        left+=1 
+        right-=1
+
     return True
 
-
-inputs = {
-    "ama": "Exp: True",
-    "race a car": "Exp: False",
-    "A man, a plan, a canal: Panama": "Exp: True",
-    "pimperepettenusa": "Exp: False",
-}
-
+inputs = ['race a car','A man, a plan, a canal: Panama','ama','abba', 'gatto']
 for input in inputs:
-    print(f"{inputs[input]} - R: {is_palindrome(input)}")
+    print(is_palindrome(input))
